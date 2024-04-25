@@ -1,0 +1,65 @@
+<nav class="navbar">
+  <div class="logo">
+    <p>Spoon</p>
+    <mat-icon>soup_kitchen</mat-icon>
+  </div>
+
+  <div class="nav-right">
+    <a href="about.html">About</a>
+    <div class="search">
+      <input #searchInput type="text" placeholder="search..." />
+      <mat-icon (click)="submitSearch(searchInput.value)">search</mat-icon>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  @for(recipe of recipes; track recipe.id){
+  <div class="card">
+    <div class="recipe-img">
+      <img src="{{ recipe.image_url }}" />
+    </div>
+    <div class="recipe-detail">
+      <div>
+        <p class="author">By {{ recipe.publisher }}</p>
+        <p class="recipe-title">{{ recipe.title }}</p>
+      </div>
+      <p class="recipe-complete" (click)="getSingleRecipe(recipe.id)">
+        details {{ "&rarr;" }}
+      </p>
+    </div>
+  </div>
+  }
+</div>
+
+<div class="popup" [style.display]="display">
+  <div>
+    <mat-icon class="close" (click)="closeRecipe()">close</mat-icon>
+    <img src="{{ singleRecipe?.image_url }}" alt="food img" />
+  </div>
+  <div class="recipe-detail-container">
+    <div>
+      <p class="recipe-name">{{ singleRecipe?.title }}</p>
+      <p class="random">
+        Ingredients
+        <span><mat-icon>timer</mat-icon>{{ singleRecipe?.cooking_time }}</span>
+      </p>
+      <ul class="ingredients">
+        @for(ingredient of singleRecipe?.ingredients; track
+        singleRecipe?.ingredients.id) {
+        <li class="ing">
+          {{ ingredient.quantity }} {{ ingredient.unit }}
+          {{ ingredient.description }}
+        </li>
+
+        }
+      </ul>
+
+      <div class="publisher">
+        <span class="by">By </span>
+        <span>{{ singleRecipe?.publisher }}</span>
+      </div>
+      <a href="{{ singleRecipe?.source_url }}">click for more detail</a>
+    </div>
+  </div>
+</div>
