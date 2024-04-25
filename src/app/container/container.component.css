@@ -129,6 +129,7 @@
 
   /* display: grid; */
   grid-template-columns: 40rem 50rem;
+  overflow-x: hidden;
 }
 
 .popup .close {
@@ -152,7 +153,6 @@
 
 .popup img {
   height: 100%;
-  width: 100%;
   overflow: hidden;
 }
 
